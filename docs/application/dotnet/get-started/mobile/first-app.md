@@ -1,4 +1,4 @@
-# Create Your First Tizen Mobile .NET Application
+# Create Your First Tizen Headed .NET Application
 
 The Tizen .NET framework allows you to easily and efficiently create
 applications for Tizen. Study the following instructions to help
@@ -38,10 +38,10 @@ contains all the files that make up an application.
 The following figure illustrates the output of application. The
 application screen displays a message, **Welcome to Xamarin Forms!** and there is no user interaction.
 
-**Figure: Application running on the mobile emulator**
+**Figure: Application running on the IoT reference board**
 
 ![Application running on the mobile
-emulator](media/cs_first_building_emulator_mobile.png)
+emulator](media/cs_first_building_emulator_mobile.png) FIXME
 
 To create a new Tizen .NET project:
 
@@ -61,19 +61,12 @@ To create a new Tizen .NET project:
 
     The **Tizen Project Wizard** pop-up window appears.
 
-4. Select the profile, **Mobile**. Click **OK**.
+4. Select the profile, **Common**. Click **OK**.
 
-    ![Tizen Project Wizard](media/cs_first_creating_project_wizard.png)
+    ![Tizen Project Wizard](media/cs_first_creating_project_wizard.png) FIXME
 
     If you select the **Common** profile, you cannot select **Mobile**,
     **TV**, or **Wearable**.
-
-The following figure illustrates a solution with four projects created and displayed in the **Solution Explorer** view:
-
-**Figure: Project with mobile, TV, and wearable profiles**
-
-![Project with mobile, TV, and wearable
-profiles](media/vstools_solution.png)
 
 - The **&lt;projectname&gt;** project contains the Xamarin.Forms code
     shared across platforms.
@@ -117,9 +110,7 @@ Tizen .NET applications are always deployed as installed packages. The
 package files have the `.tpk` file extension, and the process of generating a package is controlled by the [manifest
 file](../../../vstools/tools/manifest-editor.md). The Visual Studio
 template generates the manifest file (`tizen-manifest.xml`) to the top
-level of the &lt;projectname&gt;.Tizen project (if you create projects
-with mobile, TV, or wearable profiles, a separate manifest file is
-generated for each profile).
+level of the &lt;projectname&gt;.Tizen project.
 
 For this example application, the default manifest is sufficient. If you
 want to make any changes in the application, such as changing the
@@ -130,31 +121,28 @@ After you have built the application, deploy and run it.
 
 ## Deploying and Running Your Application
 
-To run the application, you must first deploy it to the target: either a
-device or an emulator. Deploying means transferring the package file
+To run the application, you must first deploy it to the target. Deploying means transferring the package file
 (`.tpk`) to the target and invoking the Tizen Package Manager to install
 it.
 
-To deploy and run the application on the emulator:
+To deploy and run the application on the IoT reference board:
 
 1.  In the Visual Studio menu, select **Tools &gt; Tizen &gt; Tizen
-    Emulator Manager**.
+    Device Manager**.
 
-    Alternatively, click **Launch Tizen Emulator** in the Visual Studio toolbar to launch the Tizen Emulator Manager.
+    ![Launch Tizen Emulator](media/cs_launch_tizen_emu.png) FIXME
 
-    ![Launch Tizen Emulator](media/cs_launch_tizen_emu.png)
-
-2. In the Emulator Manager, select an emulator from the list and click
-    **Launch**.
+2. In the Device Manager, select a device from the list and set
+    the connection to **on**.
 
     If no applicable emulator instance exists, [create
-    one](../../../vstools/tools/emulator-manager.md#create).
+    one](../../../vstools/tools/emulator-manager.md#create). FIXME(New page : How to set the ref. board)
 
     ![Tizen Emulator
-    Manager](media/cs_first_building_emulator_manager.png)
+    Manager](media/cs_first_building_emulator_manager.png) FIXME
 
-3. Once you launch an emulator instance, you can deploy the application
-    by clicking the emulator instance in the Visual Studio toolbar.
+3. Once you connect a target, you can deploy the application
+    by clicking the target instance in the Visual Studio toolbar.
 
     In the Visual Studio toolbar, you can select the target from the drop-down list to change the deployment target.
 
@@ -163,12 +151,12 @@ To deploy and run the application on the emulator:
     ![Select deployment
     target](media/cs_first_building_emulator_list.png)
 
-4. If deployment is successful, the application icon is visible on the
-    emulator or device screen. Click the icon to launch the application.
-    The following figure shows the launched application on the mobile emulator:
+4. If deployment is successful, the application icon is visible on the device screen. 
+    Click the icon to launch the application.
+    The following figure shows the launched application on the IoT reference board:
 
     ![Application running on the mobile
-    emulator](media/cs_first_building_emulator_mobile.png)
+    emulator](media/cs_first_building_emulator_mobile.png) FIXME
 
 Visual Studio uses the Smart Development Bridge (SDB) to communicate
 with the target device or emulator. If you encounter problems with
@@ -178,16 +166,16 @@ detecting the device in Visual Studio, you can check the SDB manually:
     Command Prompt**.
 2. In the command prompt, enter `sdb devices`.
 
-    ![Emulator detection](media/cs_first_building_sdb_prompt.png)
+    ![Emulator detection](media/cs_first_building_sdb_prompt.png) FIXME
 
     A list of the attached devices appears.
 
 If you face any issues during deployment, it is recommended to manually install the application using SDB:
 
--   Mobile application:
+-   Headed application:
 
     ```bash
-    $ sdb install <path-to-package>/org.tizen.example.CrossTemplate1.Tizen.Mobile-1.0.0.tpk
+    $ sdb install <path-to-package>/org.tizen.example.CrossTemplate1.Tizen-1.0.0.tpk
     ```
 
 ## Enhancing Your Application
@@ -281,7 +269,7 @@ controls:
 
 -   The `App` class is declared, deriving from the
     [Xamarin.Forms.Application](https://developer.xamarin.com/api/type/Xamarin.Forms.Application/)
-    class, which represents a cross-platform mobile application.
+    class, which represents a cross-platform application.
 - The `App` class constructor creates a `ContentPage` instance where
     you set up the view to display.
 - You assign what you want to display to the `Content` property of the
@@ -309,12 +297,12 @@ the `Main()` function (required as the entry point of every C\#
 program), happens in the &lt;projectname&gt;.Tizen project, in the
 matching file there. For example, if the file you are looking at in the
 portable project is named `<projectname>.cs`, the platform-specific file
-in the &lt;projectname&gt;.Tizen.&lt;platform&gt; project is
-`<projectname>.Tizen.Mobile.cs`. For a similar application,
+in the &lt;projectname&gt;.Tizen project is
+`<projectname>.Tizen.cs`. For a similar application,
 which uses only Xamarin.Forms controls, the generated code at the
 &lt;projectname&gt;.Tizen part of the project contains everything
 needed, and you do not need to make any modifications. The following
-example shows the content of the `<projectname>.Tizen.Mobile.cs` file:
+example shows the content of the `<projectname>.Tizen.cs` file:
 
 ```csharp
 using System;
@@ -477,7 +465,7 @@ below the button, and the button color has changed.
 
 **Figure: Enhanced application**
 
-![Enhanced application](media/cs_first_building_emulator_enhanced.png)
+![Enhanced application](media/cs_first_building_emulator_enhanced.png) FIXME
 
 This topic only introduces the controls in use in the example above. For
 more information on Xamarin.Forms, see the [Xamarin Developer
@@ -530,7 +518,7 @@ the solution. These pieces all go into the package.
 
 **Figure: Project layout**
 
-![Project layout](media/vstools_solution.png)
+![Project layout](media/vstools_solution.png) FIXME
 
 Package generation (and in fact installation) is controlled by the
 **tizen-manifest.xml** package manifest file. The following figure shows
@@ -540,7 +528,7 @@ the actual package.
 
 **Figure: Package content**
 
-![Package content](media/cs_first_packaging_content.png)
+![Package content](media/cs_first_packaging_content.png) FIXME
 
 When packaging your application, you also need to consider whether any
 feature or privilege declarations are needed in the manifest file, and
